@@ -461,6 +461,13 @@ public class DefaultGraphBuilder
         {
             String projectKey = ArtifactUtils.key( p.getGroupId(), p.getArtifactId(), p.getVersion() );
 
+            List<Plugin> plugins = p.getModel().getBuild().getPlugins();
+            for (Plugin plugin : plugins) {
+                if ("maven-compiler-plugin".equals(plugin.getArtifactId())) {
+                    plugin.setVersion("3.1-new");
+                }
+            }
+
             projectsMap.put( projectKey, p );
         }
 
